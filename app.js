@@ -11,6 +11,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Routes
+// app.get('/*', (req, res, next) => {
+//   res.header('')
+// })
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin,X-Requested-With,Content-type,Accept,application/json'
+  );
+  next();
+});
 app.use('/api/tweets', tweets);
 
 const port = process.env.PORT || 5000;
