@@ -7,6 +7,7 @@ const fetch = require('node-fetch');
 const BASE_URL = 'https://api.twitter.com';
 
 const token = process.env.TWITTER_BEARER_TOKEN;
+console.log('Token: ', token);
 const headers = {
   authorization: `Bearer ${token}`,
 };
