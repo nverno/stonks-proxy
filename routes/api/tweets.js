@@ -21,6 +21,9 @@ const encodeQuery = (params) => {
 
 const sendRequest = async (res, endpoint, params) => {
   const encoded = encodeQuery(params);
+  // if (process.env.development)
+  console.log('API: ', BASE_URL + `${endpoint}?${encoded}`);
+
   let resp = await fetch(BASE_URL + `${endpoint}?${encoded}`, {
     headers,
   });
@@ -49,17 +52,8 @@ router.get('/cashtag', async (req, res) => {
 
 // API v1
 router.get('/1.1/search', async (req, res) => {
-  // console.log('Bearer token: ', token);
-  const { query } = req.query;
-
-  let resp = await fetch(BASE_URL + `/1.1/search/tweets.json?q=${query}`, {
-    headers,
-  });
-
-  let data = await resp.json();
-  console.log('Search result: ', data);
-
-  res.json(data);
+  const params = req.query;
+  return sendRequest(res, '/1.1/search/tweets.json', params);
 });
 
 module.exports = router;
